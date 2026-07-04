@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automatización de Cuestionarios · 2026</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ══════════════════════════════════════
+       SCREEN 1 — BIENVENIDA / SELECCIÓN
+  ══════════════════════════════════════ -->
+  <div id="s-home" class="screen active">
+    <div class="header">
+      <div class="header-badge">
+        <span class="dot"></span>
+        SISTEMA DE AUTOMATIZACIÓN · 2026
+      </div>
+      <h1>Automatización de<br><span>Cuestionarios de Inducción</span></h1>
+      <p>Selecciona el carnet que vas a obtener el día de hoy</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="carnet-card sst" onclick="selectCarnet('sst')">
+        <div class="icon">🦺</div>
+        <h3>Carnet de Inducción SST — Transportistas</h3>
+        <p>Seguridad y Salud en el Trabajo. Para transportistas y operadores logísticos.</p>
+        <div class="tag">CUESTIONARIO SST · 2026</div>
+      </div>
+
+      <div class="carnet-card pat" onclick="selectCarnet('pat')">
+        <div class="icon">🛡️</div>
+        <h3>Carnet de Inducción Seguridad Patrimonial</h3>
+        <p>Control de accesos y prevención de pérdidas. Para terceros y proveedores.</p>
+        <div class="tag">CUESTIONARIO PATRIMONIAL · 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 2 — DATOS PERSONALES
+  ══════════════════════════════════════ -->
+  <div id="s-form" class="screen">
+    <div class="form-header">
+      <button class="back" onclick="goHome()">← Volver</button>
+      <div id="badge-tipo" class="badge-tipo"></div>
+      <h2 id="form-title">Registro de datos</h2>
+      <p>Completa tus datos para continuar con el cuestionario</p>
+    </div>
+
+    <div class="progress-bar">
+      <div id="prog-fill" class="progress-fill" style="width: 33%;"></div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field" id="f-nombre">
+        <label>Nombre y Apellido</label>
+        <input type="text" id="inp-nombre" placeholder="Ej: Juan Pérez García" autocomplete="name" />
+        <div class="err-msg">Ingresa tu nombre completo</div>
+      </div>
+      <div class="field" id="f-dni">
+        <label>DNI/CE</label>
+        <input type="text" id="inp-dni" placeholder="Ej: 12345678" maxlength="9" />
+        <div class="err-msg">El DNI debe tener 8 dígitos y el Carnet de Extranjería 9</div>
+      </div>
+    </div>
+
+    <div class="field" id="f-email">
+      <label>Correo Electrónico</label>
+      <input type="email" id="inp-email" placeholder="tucorreo@empresa.com" autocomplete="email" />
+      <div class="err-msg">Ingresa un correo válido</div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field" id="f-empresa">
+        <label>Empresa</label>
+        <input type="text" id="inp-empresa" placeholder="Ej: Gloria S.A." />
+        <div class="err-msg">Ingresa tu empresa</div>
+      </div>
+      <div class="field" id="f-cargo">
+        <label>Cargo</label>
+        <input type="text" id="inp-cargo" placeholder="Ej: Estibador" />
+        <div class="err-msg">Ingresa tu cargo</div>
+      </div>
+    </div>
+
+    <div class="field" id="f-fecha">
+      <label>Fecha de Inducción</label>
+      <input type="date" id="inp-fecha" />
+      <div class="err-msg">Selecciona la fecha</div>
+    </div>
+
+    <button class="btn-submit" id="btn-sig" onclick="submitForm()">
+      Enviar cuestionario
+    </button>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       SCREEN 3 — ÉXITO
+  ══════════════════════════════════════ -->
+  <div id="s-ok" class="screen">
+    <div class="success-wrap">
+      <div class="success-icon" id="ok-icon">✓</div>
+      <h2>¡Cuestionario completado con éxito!</h2>
+      <p>
+        En unos minutos recibirás tu carnet en el correo registrado.<br>
+        Revisa también tu carpeta de spam.
+      </p>
+      <div class="success-detail" id="ok-detail"></div>
+      <div id="ok-nota"></div>
+      <button class="btn-nuevo" onclick="goHome()">Registrar otro participante</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
